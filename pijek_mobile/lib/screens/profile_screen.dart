@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../pijek_theme.dart';
 import 'login_screen.dart';
+import 'driver/driver_home_screen.dart';
+import 'merchant/merchant_dashboard_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -37,11 +39,31 @@ class ProfileScreen extends StatelessWidget {
             const Text("+62 812 3456 7890", style: TextStyle(color: PijekTheme.textSecondary)),
             const SizedBox(height: 32),
             
-            _buildProfileItem(Icons.person_outline, "Edit Profil"),
-            _buildProfileItem(Icons.location_on_outlined, "Alamat Tersimpan"),
-            _buildProfileItem(Icons.payment_outlined, "Metode Pembayaran"),
-            _buildProfileItem(Icons.help_outline, "Bantuan & Dukungan"),
-            _buildProfileItem(Icons.privacy_tip_outlined, "Ketentuan Layanan"),
+            _buildProfileItem(Icons.person_outline, "Edit Profil", () {}),
+            _buildProfileItem(Icons.location_on_outlined, "Alamat Tersimpan", () {}),
+            _buildProfileItem(Icons.payment_outlined, "Metode Pembayaran", () {}),
+            
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+              child: Divider(color: Colors.white10, height: 1),
+            ),
+            _buildProfileItem(
+              Icons.directions_car_outlined, 
+              "Halaman Driver (Mitra)", 
+              () => Get.to(() => const DriverHomeScreen()),
+            ),
+            _buildProfileItem(
+              Icons.storefront_outlined, 
+              "Halaman Merchant (Mitra)", 
+              () => Get.to(() => const MerchantDashboardScreen()),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+              child: Divider(color: Colors.white10, height: 1),
+            ),
+            
+            _buildProfileItem(Icons.help_outline, "Bantuan & Dukungan", () {}),
+            _buildProfileItem(Icons.privacy_tip_outlined, "Ketentuan Layanan", () {}),
             
             const SizedBox(height: 32),
             Padding(
@@ -64,12 +86,12 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileItem(IconData icon, String title) {
+  Widget _buildProfileItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
       leading: Icon(icon, color: PijekTheme.primary),
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.white)),
       trailing: const Icon(Icons.chevron_right, color: PijekTheme.textSecondary),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }
