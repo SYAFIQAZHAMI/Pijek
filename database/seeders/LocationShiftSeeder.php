@@ -53,7 +53,10 @@ class LocationShiftSeeder extends Seeder
         ];
 
         foreach ($locations as $loc) {
-            LocationShift::create($loc);
+            LocationShift::updateOrCreate(
+                ['name' => $loc['name']],
+                $loc
+            );
         }
     }
 }
